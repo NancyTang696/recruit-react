@@ -14,6 +14,9 @@ const headerTheme = createMuiTheme({
         secondary: {
             main: "#C8C8C8",
             contrastText: "#6a0dad "
+        },
+        text: {
+            secondary: "#626262"
         }
     }
 });
@@ -27,7 +30,8 @@ const useStyles = makeStyles((theme: Theme) =>
             marginRight: theme.spacing(2),
         },
         title: {
-            flexGrow: 1
+            flexGrow: 1,
+            color: theme.palette.text.secondary
         },
     }),
 );
