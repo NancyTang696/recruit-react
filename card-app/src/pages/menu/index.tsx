@@ -8,6 +8,7 @@ export const Menu = () => {
             <div>
                 <Header title="Menu" children={<ArrowBackIconButton />} />
             </div>
+            <h1>Menu Content</h1>
         </div>
     )
 }

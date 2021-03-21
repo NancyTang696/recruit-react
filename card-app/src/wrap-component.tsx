@@ -8,7 +8,7 @@ export const makeStore = (): Store => {
     return configureStore({ reducer, middleware })
 }
 
-const wrapComponent = (Component: ComponentType, store: Store | null = null, props = {}): ReactElement => {
+const WrapComponent = (Component: ComponentType, store: Store | null = null, props = {}): ReactElement => {
     return (
       <Provider store={store || makeStore()}>
           <Component {...props} />
@@ -16,4 +16,4 @@ const wrapComponent = (Component: ComponentType, store: Store | null = null, pro
     )
   }
   
-  export default wrapComponent
+  export default WrapComponent
