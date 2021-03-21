@@ -1,4 +1,4 @@
-import { configureStore, Action } from '@reduxjs/toolkit'
+import { configureStore, Action, getDefaultMiddleware } from '@reduxjs/toolkit'
 import { ThunkAction } from 'redux-thunk'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
@@ -6,7 +6,13 @@ import rootReducer, { RootState } from './reducers/root-reducer'
 
 
 const store = configureStore({
-    reducer: rootReducer
+    reducer: rootReducer,
+    middleware: getDefaultMiddleware({
+        serializableCheck: {
+            ignoredActions: ['creditCardDetails/cardRegistered'],
+          ignoredPaths: ['card.cardDetails.expiryDate', 'payload.expiryDate']
+        }
+      })
 })
 
 export type AppDispatch = typeof store.dispatch

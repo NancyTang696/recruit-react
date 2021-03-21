@@ -16,6 +16,7 @@ const creditCardDetails = createSlice({
     initialState,
     reducers: {
         cardRegistered: (state, action: PayloadAction<creditCard>) => {
+            debugger
             state.cardDetails = action.payload;
             state.registered = true;
         },

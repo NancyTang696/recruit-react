@@ -5,6 +5,7 @@ import CreditCard from "../../common/types/credit-card";
 import { useAppDispatch, useAppSelector } from '../../store'
 import ReactDatePicker from "react-datepicker";
 import Button from '@material-ui/core/Button';
+import {cardRegistered} from '../../store/reducers/credit-card-reducer'
 import "react-datepicker/dist/react-datepicker.css";
 import styles from './styles.module.scss'
 
@@ -22,6 +23,8 @@ export const RegisterCreditCard = () => {
     debugger;
     const card = useAppSelector(state => state.card);
     const user = useAppSelector(state => state.user);
+
+    const dispatch = useAppDispatch();
 
     const getNumberField = (name: CardStringProperties, fieldDescription: string): JSX.Element => {
         return (
@@ -51,7 +54,7 @@ export const RegisterCreditCard = () => {
                 name={name}
                 control={control}
                 rules={{ required: true }}
-                defaultValue=""
+                defaultValue={card.cardDetails.expiryDate}
                 error={errors[name]}
                 render={(props) => (
                     <ReactDatePicker
@@ -59,6 +62,7 @@ export const RegisterCreditCard = () => {
                         placeholderText="Select date"
                         onChange={(e) => props.onChange(e)}
                         selected={props.value}
+                        dateFormat="dd/MM/yyyy"
                     />
                 )}
             />
@@ -81,6 +85,7 @@ export const RegisterCreditCard = () => {
 
     const handleRegister = (values: CreditCard) => {
         console.log(values);
+        dispatch(cardRegistered(values));
     };
 
 
