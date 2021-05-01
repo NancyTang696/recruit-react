@@ -2,19 +2,23 @@ import WrapComponent from '../../wrap-component'
 import { render, screen, fireEvent } from '@testing-library/react'
 import {RegisterCreditCard} from './index'
 import userEvent from '@testing-library/user-event'
+import { createMemoryHistory } from 'history'
+import { Router } from '../../common/components/router'
 
 describe('Register Page Validation', () => {
     beforeEach(() => {
-        render(WrapComponent(RegisterCreditCard))
+        const history = createMemoryHistory()
+        history.push('/')
+
+        render(WrapComponent(Router, null, {history:history}))
       })
 
       it('page components validation', () => {
-        expect(screen.findByTestId('creditCardNumber')).toBeInTheDocument()
-        expect(screen.findByTestId('expiryDate')).toBeInTheDocument()
+        expect(screen.getByRole('textbox', { name: "Credit Card Number"})).toBeInTheDocument()
     })
 
     it('Should validate when credit card format is in correct', async () => {
-        const creditCardInput = screen.getByRole('input', { name: /creditCardNumber/i})
+        const creditCardInput = screen.getByRole('textbox', { name: "Credit Card Number"})
         userEvent.type(creditCardInput, 'e')
 
         fireEvent.blur(creditCardInput);
